@@ -1,82 +1,58 @@
-\documentclass{article}
 
-% if you need to pass options to natbib, use, e.g.:
-% \PassOptionsToPackage{numbers, compress}{natbib}
-% before loading nips_2016
 %
-% to avoid loading the natbib package, add option nonatbib:
-% \usepackage[nonatbib]{nips_2016}
-
-\usepackage[final]{nips_2016}
-
-% to compile a camera-ready version, add the [final] option, e.g.:
-%\usepackage[final]{nips_2016}
-
-\usepackage[utf8]{inputenc} % allow utf-8 input
-\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
-\usepackage{hyperref}       % hyperlinks
-\usepackage{url}            % simple URL typesetting
-\usepackage{booktabs}       % professional-quality tables
-\usepackage{amsfonts}       % blackboard math symbols
-\usepackage{nicefrac}       % compact symbols for 1/2, etc.
-\usepackage{microtype}      % microtypography
+\documentclass{llncs}
+%
+\usepackage{makeidx}  % allows for indexgeneration
+\usepackage{natbib}
 \usepackage{cite}
 \usepackage{amsmath}
 \usepackage{float}
+\usepackage{threeparttable}
+\usepackage{subfig}
 \usepackage{graphicx}
 \graphicspath{ {Minecraft/images/} }
 
-\title{An Awesome Title}
+% User defined commands
 
-% The \author macro works with any number of authors. There are two
-% commands used to separate the names and addresses of multiple
-% authors: \And and \AND.
 %
-% Using \And between authors leaves it to LaTeX to determine where to
-% break the lines. Using \AND forces a line break at that point. So,
-% if LaTeX puts 3 of 4 authors names on the first line, and the last
-% on the second line, try using \AND instead of \And before the third
-% author name.
+\begin{document}
+%
+%\frontmatter          % for the preliminaries
+%
+%\pagestyle{headings}  % switches on printing of running heads
 
-\author{
-   Alan Yeung\thanks{\url{http://yeungalan0.github.io/}} \\
-  Senior Capstone \\
-  Department of Computer Science \\
-  Colorado College \\
-  902 N Cascade Ave, Colorado Springs, CO 80903 \\
-  \texttt{Alan.Yeung@coloradocollege.edu} \\
-  %% examples of more authors
-  %% \And
-  %% Coauthor \\
-  %% Affiliation \\
-  %% Address \\
-  %% \texttt{email} \\
+%
+%\mainmatter              % start of the contributions
+%
+\title{Transfer Learning for Deep Reinforcement Learning Agents}
+%
+\titlerunning{Transfer Learning for DRL}  % abbreviated title (for running head)
+%                                     also used for the TOC unless
+%                                     \toctitle is used
+%
+\author{Trevor Barron \and Matthew Whitehead \and Alan Yeung}
+%
+\authorrunning{Barron et al.} % abbreviated author list (for running head)
+%
+%%%% list of authors for the TOC (use if author list has to be modified)
+\tocauthor{Trevor Barron, Matthew Whitehead, and Alan Yeung}
+%
+\institute{Colorado College, Colorado Springs CO 80903, USA\\
+\email{\{trevor.barron, matthew.whitehead, alan.yeung\}@coloradocollege.edu}\\ 
 }
 
-% User defined commands
-\newcommand{\sectlabel}[1]{section~\ref{#1} (\nameref{#1})}
-
-\begin{document}
-% \nipsfinalcopy is no longer used
-
-\maketitle
+\maketitle              % typeset the title of the contribution
 
 \begin{abstract}
-  The abstract paragraph should be indented \nicefrac{1}{2}~inch
-  (3~picas) on both the left- and right-hand margins. Use 10~point
-  type, with a vertical spacing (leading) of 11~points.  The word
-  \textbf{Abstract} must be centered, bold, and in point size 12. Two
-  line spaces precede the abstract. The abstract must be limited to
-  one paragraph.
+Abstract abstract.
+\keywords{deep learning, reinforcement learning, transfer learning, convolutional neural networks}
 \end{abstract}
+%
 
 \section{Introduction}
 
-%Talk about transfer learning used in other papers and reinforcement learning.
-%Specifically mention the Google Deepmind model you are using.
-
-Deep reinforcement learning (DRL) is currently being used by researchers to create agents that out perform most others that have come before in artificail intelligence (AI) and machine learning (ML) tasks.
-For instance, in \citep{mnih2015human} and GO researchers were able to utilize (DRL) to create agents that outperformed human experts in several Atari 2600 games and Go respectively.
+Deep reinforcement learning (DRL) is currently being used by researchers to create agents that are out performing any that have come before in artificail intelligence (AI) and machine learning (ML) tasks.
+For instance, in \citep{mnih2015human} and \citep{silver2016mastering} researchers were able to utilize DRL to create agents that outperformed human experts in several Atari 2600 games and the extremely complex game of Go respectively.
 These are unprecidented achievements and have been important milestones in the advancement of artificail intelligence and machine learning.
 However, even with the use of DRL, there are still tasks that are too computationally intense or time consuming for most researchers to practically pursue. 
 
@@ -89,10 +65,19 @@ We train an agent to perform a simple task in a Minecraft like environment, and 
 The DRL network from (CITE) was used in conjuction with human programmed environments for the TL.
 Although there are considerable drawbacks and limitations to using human programmed environments for TL, we believe that these findings show that the benefits of DRL and TL combined are significant enough as to outweight these limitations in many AI and ML tasks. 
 
+We focus on the potential to use TL as an augmentation to DRL that ultimately decreases learning time for a target task.
+Many other papers that study TL and RL, such as \citep{ramon2007transfer}, focus on methods developing methods to generalize learning to other related, but different, tasks. 
+In \citep{taylor2007cross} the authors develop a TL method and run analysis similar to ours comparing the improvement of agents that use TL (TL agents) and agents that do not use TL (non-TL agents).
+However, their paper focuses on experiments and results involving the rule transfer algorithm they developed for TL and RL, while we focus on analyzing the benefits of human aided TL and DRL.
+
+%
+%\cite{Simonyan2014}
+
+%
 \section{Background}
 
-We use the same deep neural network (DNN) and reinforcement learning (RL) algorithm outlined in (CITE) for our experiments. 
-As described in (CITE) the input to the DNN consists of an 84 X 84 X 4 image, the first hidden layer convolves 16 8 X 8 filters with stride 4 with the input image and applies a rectifier nonlinearity, the second hidden layer convolves 32 4 X 4 filters with stride 2 and applies another rectifier nonlinearity, the final hidden layer consists of 256 rectifier units and is fully connected, and finally the output layer is fully connected linear layer with an output for each valid action. 
+We use the same deep convolutional neural network and reinforcement learning (RL) algorithm outlined in \citep{mnih2015human} for our experiments. 
+As described in \citep{mnih2015human} the input to the DNN consists of an 84 X 84 X 4 image, the first hidden layer convolves 16 8 X 8 filters with stride 4 with the input image and applies a rectifier nonlinearity, the second hidden layer convolves 32 4 X 4 filters with stride 2 and applies another rectifier nonlinearity, the final hidden layer consists of 256 rectifier units and is fully connected, and finally the output layer is fully connected linear layer with an output for each valid action. 
 
 Additionally, the RL algorithm uses a return that is the reward from the current action ($r$) plus the stream of future rewards till termination ($T$) discounted by $\gamma$ at each time step $t$, $R_{t}=\sum_{t' = t}^{T}\gamma^{t'-t}r_{t'}$.
 The optimal action-value function $Q^{*}(s,a)$ is defined as the maximum achievable return from following any strategy after seeing sequence $s$ and performing some action $a$, $Q^{*}(s,a)=max_{\pi}\bf{E}_{s' \sim \epsilon} [r + \gamma \overset{max}{a'} Q^{*}(s',a') | s,a]$.
@@ -108,12 +93,11 @@ There are various measures for the benefits of TL \citep{taylor2009transfer}, bu
 That is, the benefit of TL is measured by the difference in total training time for the similar performance of two agents, one augmented with TL and one not. 
 
 In this paper we use a human programmed version of TL, where the source tasks are preselected by the human, and a DNN.
-The agents (one using TL and one not) perform a simple task described in \sectlabel{experimentalSetup} and the results from the experiments are described in \sectlabel{results}.
+The agents (one using TL and one not) perform a simple task described in section~\ref{subsec:setup} and the results from the experiments are described in section~\ref{sec:results}.
 
 Other studies have found that RL coupled with TL con produce a speedup in learning (CITE).
 
-
-\section{Experimental Setup}\label{experimentalSetup}
+\section{Experiments}\label{sec:experiments}
 
 % Questions to ponder: How are the weights being corrected in the DNN? Does it make sense to give -1 for going backwards (sometimes going backwards is a good idea, i.e. dangerous walkway)? 
 
@@ -124,98 +108,211 @@ If there is no drastic difference in learning times, or a negligible difference,
 
 We tested our environment with both the Torch and Caffe deeplearning frameworks \citep{collobert2011torch7,jia2014caffe}. For all of our experiments and results we used the Caffe framework as it decreased training time compared to Torch. 
 
-\subsection{Setup}
+\subsection{Setup}\label{subsec:setup}
 
-For our experiments we use a simple goal oriented task where the goal is to maximize the reward earned. 
-The target task environment is depicted below.
-The agent earns one point of reward for going further in the Z (forward) direction than ever previously (let's call this Z\_max), zero points for being at a Z position where Z=Z\_max, and negative one point if in a position Z < Z\_max.
+Our experiments use a simple goal oriented task where the goal is to maximize the reward earned. 
+The target task environment is depicted in figure \ref{fig:setup1}.
+The agent earns one point of reward for going further in the $Z$ (forward) direction than ever previously (let's call this $Z\_max$), zero points for being at a $Z$ position where $Z=Z\_max$, and negative one point if in a position $Z < Z\_max$.
 The negative rewards were meant to increase the efficiency of the agent by decreasing inefficient actions by the agent, such as moving backwards, forwards, backwards, etc. 
-The reward of the target task is maximized by creating a bridge of six blocks in size and walking forward to the end of the walkway (figure ~\ref{figure:2}). 
+The reward of the target task is maximized by creating a bridge of six blocks in size and walking forward to the end of the walkway (figure ~\ref{fig:setup2}). 
 
 \begin{figure}[H]
   \centering
   \begin{minipage}[b]{0.45\textwidth}
     \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap6.png}
     \caption{Target task}
+    \label{fig:setup1}
   \end{minipage}
   \hfill
   \begin{minipage}[b]{0.45\textwidth}
-    \includegraphics[width=\textwidth, natwidth=750,natheight=560]{completed.png}\label{figure:2}
+    \includegraphics[width=\textwidth, natwidth=750,natheight=560]{completed.png}
     \caption{Created bridge}
+    \label{fig:setup2}
   \end{minipage}
 \end{figure}
 
-A target task of with a gap of six blocks was chosen because that is the maximum number of blocks that can be removed that still allows a bridge to be created. 
+\noindent A target task with a gap of six blocks was chosen because that is the maximum number of blocks that can be removed that still allows a bridge to be created. 
 
 To augment agents with TL we created five source tasks to train the agent for the target task.
 
-\begin{figure}[H]
-  \begin{center}
-  \begin{minipage}[b]{0.328\linewidth}
-    \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap1.png}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.328\linewidth}
-    \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap2.png}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.328\linewidth}
-    \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap3.png}
-  \end{minipage}
-  \end{center}
-\end{figure}
+% \begin{figure}[H]
+%   \begin{center}
+%   \begin{minipage}[b]{0.328\linewidth}
+%     \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap1.png}
+%   \end{minipage}
+%   \hfill
+%   \begin{minipage}[b]{0.328\linewidth}
+%     \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap2.png}
+%   \end{minipage}
+%   \hfill
+%   \begin{minipage}[b]{0.328\linewidth}
+%     \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap3.png}
+%   \end{minipage}
+%   \end{center}
+% \end{figure}
 
-\vspace{-23pt}
+% \vspace{-40pt}
 
-\begin{figure}[H]
-  \begin{center}
-  \begin{minipage}[b]{0.328\linewidth}
-    \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap4.png}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.328\linewidth}
-    \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap5.png}
-  \end{minipage}
-  \hfill
-  \begin{minipage}[b]{0.328\linewidth}
-    \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap6.png}
-  \end{minipage}
-  \end{center}
-  \caption{Progression of transfer learning source tasks from the simplest (walkway with gap size 1) to the target task (walkway with gap size 6).}
+% \begin{figure}[H]
+%   \begin{center}
+%   \begin{minipage}[b]{0.328\linewidth}
+%     \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap4.png}
+%   \end{minipage}
+%   \hfill
+%   \begin{minipage}[b]{0.328\linewidth}
+%     \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap5.png}
+%   \end{minipage}
+%   \hfill
+%   \begin{minipage}[b]{0.328\linewidth}
+%     \includegraphics[width=\textwidth, natwidth=750,natheight=560]{gap6.png}
+%   \end{minipage}
+%   \end{center}
+%   \caption{Progression of transfer learning source tasks from the simplest (walkway with gap size 1) to the target task (walkway with gap size 6).}
+% \end{figure}
+
+\begin{figure}
+\begin{center}
+\begin{tabular}{ccc}
+\subfloat{\includegraphics[width=.33\linewidth]{gap1.png}} & \subfloat{\includegraphics[width=.33\linewidth]{gap2.png}} & \subfloat{\includegraphics[width=.33\linewidth]{gap3.png}} \\
+\subfloat{\includegraphics[width=.33\linewidth]{gap4.png}} & \subfloat{\includegraphics[width=.33\linewidth]{gap5.png}} & \subfloat{\includegraphics[width=.33\linewidth]{gap6.png}}\\
+\end{tabular}
+\end{center}
+\caption{Progression of transfer learning source tasks from the simplest (walkway with gap size 1) to the target task (walkway with gap size 6).}
 \end{figure}
  
 The source tasks feature a gap ranging from size one block to five blocks in the pathway. 
 The agent starts on the simplest source task, the environment with a gap of one block, and progresses to the most complex source task, the environment with a gap of five blocks, before advancing to the target task, the environment with a gap of six blocks.
 By training the agent on simpler source tasks than the target task, the hope is that the agent will learn the optimal policy (creating a bridge) faster than the agents that begin training directly on the target task. 
 
-The agent is transitioned to the next most complex source task based on performance.
+The TL agent is transitioned to the next most complex source task based on performance.
 If the agents average reward from the last ten games is above a certain threshold, then the agent transitions to the next source task, or the target task if it was on the most complex source task.
 The threshold used is the amount of minimum reward necessary for the agent to have created a bridge. 
-Specifically, the maximum reward attainable without a bridge is about twelve points (3 blocks * 4 points per block), thus if the agent achieves an average score of at least fifteen over the last ten games, the agent must have created a bridge successfully at least one time. 
-Generally, a ten game average score of at least fifteen indicates that the agent can create bridges somewhat consistently because without a bridge an untrained agent usually garners negative points (with inefficient movements described above). 
+Specifically, the maximum reward attainable without a bridge is about twelve points (3 blocks * 4 points per block), thus if the agent achieves an average score of at least sixteen over the last ten games, the agent must have created a bridge successfully at least one time. 
+Generally, a ten game average score of at least sixteen indicates that the agent can create bridges somewhat consistently because without a bridge an untrained agent usually garners negative points (with inefficient movements described above). 
 
 The agents have seven possible actions, move forewards, move backwards, rotate up, rotate down, create a grass block, destroy a grass block, or do nothing. 
 These actions were selected because they are the minimal actions needed to create a bridge and achieve a maximum reward, any other actions would be learned away and increase the total training time for both the TL and non-TL agents. 
-There are two possible ways for a round to end, if the agent steps off the bridge, either by walking forwards or backwards off an edge, or if the maximum frame limits per round is reached, the round ends and a new round begins with the agent in the starting position. 
+There are two possible ways for an episode to end, if the agent steps off the bridge, either by walking forwards or backwards off an edge, or if the maximum frame limits per round is reached, the episode ends and a new episode begins with the agent in the starting position. 
 
-% Discuss actions per frame, etc?
+As discussed in \citep{mnih2015human}, the agent sees and selects actions every fourth frame, which essentially increases the number of games the agent can play by four times. 
+On every skipped frame the agents action is repeated, with the exception of break block and create block, which are only performed once every four frames in order to prevent the agent from creating or breaking four blocks inadvertently. 
+Each episode lasts for a maximum of 500 frames and each epoch is 5000 frames. 
+However, this does not necessarily translate perfectly into ten episodes per epoch because (as often happens) the agent can die by walking off the path.
 
-\section{Results}\label{results}
+\section{Results and Discussion}\label{sec:results}
 
-Include graph of results.
+Figure \ref{fig:res1} and figure \ref{fig:res2} show the average game reward over the number of training epochs for two trials. 
+The approximate maximum reward achievable (roughly eighty-four points) is represented by the black line.
+We use the term ``approximate'' because it is possible for an agent to achieve slightly more than eighty-four points by falling forward off the edge at the end of the walkway.
+The red line represents whether or not the agent is able to consistently create a bridge in the target task. 
+As discussed in section \ref{subsec:setup}, the appoximate minimum number of points achievable after creating a bridge is sixteen points.
 
-What are the results/interpretations?
-Add your graph results here.
-Interpret the results, why, cause, limitations, etc 
-Idea is similar to leveling up in video games, you become better at some task with each level up, but you might not have mastered any task at a specific level.
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=\textwidth, natwidth=750,natheight=560]{test1_results.png}
+  \end{center}
+  \caption{TL agent Vs. non-TL agent trial one}
+  \label{fig:res1}
+\end{figure}
 
-\section{Conclusion}
+% TODO: Add image of end of level
 
-Conclude and suggest future avenues for research!
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[width=\textwidth, natwidth=750,natheight=560]{test2_results.png}
+  \end{center}
+  \caption{TL agent Vs. non-TL agent trial two with red dots indicating a change in source task}
+  \label{fig:res2}
+\end{figure}
 
+The red points in figure \ref{fig:res2} represent the approximate epoch (since task transitions usually occur between epochs) where the agent's source task changed.  
+The first red point represents the transition from the source task of gap size one to the source task of gap size two, similarly for the second, third, and fourth red dot, while the fifth red dot represents the transition from the the source task of gap size five to the target task of gap size six. 
+
+% TODO: change "score" on graph to "average reward per game", clip epochs so that they match
+
+Figure \ref{fig:res1} and figure \ref{fig:res2} depict a clear learning advantage later on for the TL agent compared to the non-TL agent. 
+Both graphs show the TL agent underperforming the non-TL agent in terms of reward early on.
+This difference in rewards early on may be attributable to the difference in tasks for the TL agent compared to the non-TL agent, particularly it may have been challenging for the TL agent to generalize the lessons learned from source tasks to new tasks.
+
+However, once the TL agent transitions to the target task, the average game reward (which is an indicator of learning) steadily increases.
+Specifically, when looking at figure \ref{fig:res2} after training on all source tasks, the TL agent vastly out performs the non-TL agent in terms of average reward achieved.
+It is interesting to observe that as the average game reward of the TL agent increases at a steady rate (after reaching the target task), the average game reward of the non-TL agent appears to level off for a significant time (roughly one hundred epochs).
+The average reward of the non-TL agent levels off around the maximum achievable reward without creating a bridge (about twelve points), which indicates that the non-TL agent was having a difficult time discovering the optimal policy (creating a bridge). 
+In order for the non-TL agent to have any notion of the benefits of creating a bridge, the non-TL agent must first randomly place six blocks to cover the gap, and then walk across.
+That is, the reward is delayed until several ``correc'' actions are performed. 
+As the graphs indicate, this was quite a time consuming challenge for the non-TL agent. 
+On the other hand, TL agent was able to grasp the vital concept of creating a bridge early on as it trained on each source task. 
+Once the TL agent transitioned to the target task it simply needed to apply its previous learning to create a bridge and continually learn efficient movements to accumulate reward. 
+
+Table \ref{tab:1} displays the number of epochs needed for each agent to consistently create a bridge and achieve the maximum achievable reward respectively (where the former must be done before the latter). 
+Since the training epochs for non-TL and TL agents take the exact same time, the number of epochs also represent the total amount of time an agent took to learn the goal. 
+
+\renewcommand{\arraystretch}{1.2}
+\begin{table}[htb]
+  \begin{threeparttable}
+    \caption{Epochs taken to achieve goal}\label{tab:1}
+    \begin{tabular}{l|c|c|c|c} 
+      \hline
+      & \multicolumn{2}{|c|}{Trail 1} & \multicolumn{2}{|c}{Trail 2} \\
+      \hline
+                     & Built Bridge & \multicolumn{1}{p{2.5cm}|}{\centering Max Achievable Reward} & Built Bridge & \multicolumn{1}{p{2.5cm}}{\centering Max Achievable Reward} \\
+      \hline
+      TL agent       & 186          & 261                      & 190          & 381                      \\
+      Non-TL agent   & 311          & N/A                      & 307          & N/A                      \\
+      Percent change & -40\%        & N/A                      & -38\%        & N/A                      \\ 
+      \hline
+    \end{tabular}
+    \begin{tablenotes}[flushleft]\footnotesize
+    \item{Note: The table shows the number of epochs (time) taken by each agent to build a bridge and achieve the maximum achievable score in the target task, where percent change$=($TL epochs$-$non-TL epochs$)/$non-TL epochs.}
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+Table \ref{tab:1} shows that the TL agent was able to consistently build a bridge in thirty-nine percent less time, on average, compared to the non-TL agent. 
+Additionally, the table indicates that the TL agent was able to earn the maximum achievable reward consistently while the non-TL agent was unable to earn the maximum achievable reward during the alloted training time. 
+It is important to note that the time taken by the TL agent to earn the maximum achievable reward is not consistent (261 epochs in trial one vs. 381 epochs in trial two), however given that the non-TL agent was never able to achieve a similar feat, the inconsistency may not be a large concern in research. 
+These results indicate, quite clearly, the advantages in total training time when using TL methods. 
+
+These results do indicate that TL combined with RL has the potential to substantially speed up learning. 
+However, it is important to acknowledge the limitations of our use of TL, the first and foremost being that source tasks were selected by humans. 
+To date, there is no program that uses fully automated TL, that is no program can successfully select an appropriate source task from a target task, learn how the source and target tasks are related, and effectively transfer knowledge from the source task to the target task, and our methods are no exception \citep{taylor2009transfer}. 
+The performance benefits of TL undeniably depend heavily on the source tasks selected, and since our TL methods use human selected/programmed source tasks our results will may vary drastically with different source and target tasks. 
+Another limitation of TL in general is that there is no set method to choose source tasks that guarantees TL will occur.
+In order for TL to occur, the source and target tasks must be similar enough that an agent can generalize learning, but different enough that the source task helps in the learning of the target task.
+Currently, there is no measure for the similarity of source an target tasks that guarantees the effectiveness of the source task in TL \citep{taylor2009transfer}.
+Additionally, the performance benefits of TL may vary from trial to trial, as the difference in epochs in Max Achievable Reward or the TL agent in table \ref{tab:1} indicate. 
+Thus, as with many TL methods, there are no guarantees as to how much better a TL agent will perform compared to a non-TL agent, as the RL algorithm we use has an element of randomness. 
+%Even though the performance benefits of TL are not as consistent as one would like, it is still important to remember that the TL agent vastly outperformed the non-TL agent that was unable to earn the maximum achievable reward in the training time. 
+
+Even with these limitations, our results indicate that TL may provide substantial benefits to RL that out weigh any of the costs.
+We have shown TL to be an effective tool in speeding up RL, particularly with tasks that include delayed rewards, and have provided data that signifies the degree of benefits TL can provide.
+
+
+%Idea is similar to leveling up in video games, you become better at some task with each level up, but you might not have mastered any task at a specific level.
+
+\section{Future Work}
+
+Fortunately, the limitations of our TL methods provide promising avenues for future research. 
+There is some work being done on automating TL source selection, but full automation may still be a while away. 
+However, creating a semi automated TL algorithm seems like a particularly promising research avenue. 
+It may be possible to train an agent to act like a coach and select source tasks, from a set (or sets) of human provided tasks, to train an agent effectively. 
+Depending on how the sets of tasks are defined, the ``coach'' may even be somewhat generalizble and be able to train agents on other tasks with a different set of provided source tasks. 
+Additionally, instead of relying on a human to develop a function, it may be possible to train a DNN to approximate the similarity of a source task and target task and aid in TL training of agents. 
+If DNN could approximate the similarity of a source task and target task to an ``accurate'' enough degree, then we would be on step closer to fully automating TL.
+Finally, more work needs to be done in measuring the benfit of TL on different types of tasks and different selections of source tasks.
+Does TL work better with delayed reward tasks or imediate reward tasks?
+Would a different combination of source tasks than the ones we chose, such as skipping gaps of even length, lead to faster or slower learning?
+More work needs to be done to answer these and many other important questions in the domain of TL combined with DRL. 
+
+
+%
+% ---- Bibliography ----
+%
 \newpage{}
 
 \bibliographystyle{unsrt}
 \bibliography{references}
 
 \end{document}
+
+
